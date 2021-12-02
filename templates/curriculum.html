@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="static/curriculo.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+
+  <title>Curriculum</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left_side">
+      <!-- Perfil -->
+      <div class="profile">
+        <h2>Pablo Segat</h2>
+        <h5>Estagiário</h5>
+        <h5>Cond. Alto da Boa Vista, Q. 103, Cj. 01 Lote 10</h5>
+        <div class="buttons">
+          <a href="/formularioIncluir"><button class="btn">Incluir dados</button></a>
+          <a href="/excluir"><button class="btn">Excluir dados</button></a>
+        </div>
+      </div>
+      <!-- Contatos -->
+      <div class="left_items">
+        <h4 class="title">Contatos</h4>
+        <ul>
+          <li>
+            <span class="icons">
+              <i class='bx bxl-linkedin-square'></i>
+            </span>
+            <a href="https://www.linkedin.com/in/pablo-segat-62949621a/" target="_blank"><span
+                class="text">LinkedIn</span></a>
+          </li>
+          <li>
+            <span class="icons">
+              <i class='bx bx-mail-send'></i>
+            </span>
+            <span class="text">pablo.h.segat@gmail.com</span>
+          </li>
+          <li>
+            <span class="icons">
+              <i class='bx bxs-phone'></i>
+            </span>
+            <span class="text"> (61) 98501-5651</span>
+          </li>
+        </ul>
+      </div>
+      <!--Formação-->
+      <div class="left_items">
+        <h4 class="title">Formação</h4>
+        <ul>
+          {% for f in formacoes %}
+          <li>
+            <h4 class="date">{{f[2]}}</h4>
+            <h5 class="text">{{f[1]}}</h5>
+            <h5 class="university">{{f[3]}}</h5>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!--Competências-->
+      <div class="left_items">
+        <h4 class="title">Competências</h4>
+        <ul>
+          {% for c in competencias %}
+          <li>
+            <h4 class="skills">{{c[1]}}</h4>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="right_side">
+      <!--Perfil-->
+      <div class="right_items">
+        <h3 class="title">Perfil</h3>
+        <p>Estudante de Ciência da Computação,
+          atualmente cursando o 4° Semestre no Centro Universitário de Brasília (UniCEUB),
+          com 1 ano e 2 meses de estágio na área e 2 projetos de desenvolvimento web.</p>
+      </div>
+      <!--Experiência-->
+      <div class="right_items">
+        <h3>Experiência Profissional</h3>
+        {% for e in experiencias %}
+        <div class="experience">
+          <div class="time_line">
+            <span class="time_point"></span>
+            <span class="time_road"></span>
+          </div>
+          <div class="content">
+            <div class="interval">
+              <h5>{{e[2]}}</h5>
+              <h5>{{e[1]}}</h5>
+            </div>
+            <div class="description">
+              <h4>{{e[3]}}</h4>
+              <p>{{e[4]}}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

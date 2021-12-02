@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../Engenharia de Software/Projeto-Solaris/.idea/Projeto-Solaris.iml" filepath="$PROJECT_DIR$/../../../Engenharia de Software/Projeto-Solaris/.idea/Projeto-Solaris.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/.idea/PycharmProjects.iml" filepath="$USER_HOME$/PycharmProjects/.idea/PycharmProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/curriculum-web.iml" filepath="$PROJECT_DIR$/.idea/curriculum-web.iml" />
+    </modules>
+  </component>
+</project>

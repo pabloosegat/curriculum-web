@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link href="static/formulario.css" rel="stylesheet" type="text/css" />
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="static/js/jquery.mask.min.js"></script>
+  <script src="static/js/script.mascara.js"></script>
+
+  <title>Formulário Curriculum</title>
+</head>
+
+<body>
+  <div class="flash text-center">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul id="messages" class="list-unstyled">
+      {% for message in messages %}
+      <li class="alert text-danger bg-warn" style="background-color: rgba(0, 0, 0, 0.2);">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+  <div class="container">
+    <form>
+      <div class="buttons mt-4 d-flex justify-content-center">
+        <a href="/"><button type="button" class="btn">Visualizar currículo</button></a>
+      </div>
+  
+      <h4>Formação Acadêmica</h4>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="form">Formação</label>
+          <input type="text" class="form-control" id="form" placeholder="Ex: Ciências" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="dta_form">Data</label>
+          <input type="text" class="form-control" name="data" id="dta_form" placeholder="00/0000 - 00/0000" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="universidade">Universidade</label>
+        <input type="text" class="form-control" id="universidade" placeholder="Ex: Centro Universitário de Brasília" />
+      </div>
+      <div class="buttons d-flex justify-content-end">
+        <button id="incluirform" class="btn btn-primary">Inserir</button>
+      </div>
+  
+      <h4>Competências</h4>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="comp">Competência</label>
+          <input type="text" class="form-control" id="comp" />
+        </div>
+      </div>
+      <div class="buttons">
+        <button id="incluircomp" class="btn btn-primary">Inserir</button>
+      </div>
+  
+      <h4>Experiência Profissional</h4>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="func">Função</label>
+          <input type="text" class="form-control" id="func" placeholder="Ex: Estagiário" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="dta_exp">Data</label>
+          <input type="text" class="form-control" name="data" id="dta_exp" placeholder="00/0000 - 00/0000" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="empresa">Empresa</label>
+        <input type="text" class="form-control" id="empresa" placeholder="Ex: Banco do Brasil" />
+      </div>
+      <div class="form-group">
+        <label for="desc_exp">Descrição</label>
+        <textarea class="form-control" id="desc_exp" rows="3"></textarea>
+      </div>
+      <div class="buttons">
+        <button id="incluirexp" class="btn btn-primary">Inserir</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
+
+<script>
+  $.ajaxSetup({
+    type: "POST"
+  });
+
+  $("#fm").submit(function (event) {
+    event.preventDefault();
+  });
+
+  // Formação
+  $('#incluirform').click(function () {
+    $('#fm').submit();
+    if ($('#form').val() != '' && $('#dta_form').val() != '' && $('#universidade').val() != '') {
+      $.ajax({
+        url: "/incluirForm",
+        data: { form: $('#form').val(), dta_form: $('#dta_form').val(), universidade: $('#universidade').val() },
+      });
+    }
+  });
+
+  // Competências
+  $('#incluircomp').click(function () {
+    $('#fm').submit();
+    if ($('#comp').val() != '') {
+      $.ajax({
+        url: "/incluirComp",
+        data: { comp: $('#comp').val() },
+      });
+    }
+  });
+
+  // Experiências
+  $('#incluirexp').click(function () {
+    $('#fm').submit();
+    if ($('#empresa').val() != '' && $('#dta_exp').val() != '' && $('#func').val() != '' && $('#desc_exp').val() != '') {
+      $.ajax({
+        url: "/incluirExp",
+        data: { empresa: $('#empresa').val(), dta_exp: $('#dta_exp').val(), func: $('#func').val(), desc_exp: $('#desc_exp').val() },
+      });
+    }
+  });
+</script>
