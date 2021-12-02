@@ -1,6 +1,18 @@
-from util import database
+from util import connectiondb
 
-mysql = database.SQL('root', '', 'programacao_web')
+database = connectiondb.Database()
+
+cmd = 'DROP DATABASE `curriculum_pablo`;'
+if database.executar(cmd, []):
+    print('Database excluído')
+
+cmd = "CREATE DATABASE curriculum_pablo;"
+if database.executar(cmd, []):
+    print('Database criado')
+else:
+    print('Database não foi criado')
+
+mysql = connectiondb.SQL('curriculum_pablo')
 
 #Tabela de formação
 cmd = 'DROP TABLE IF EXISTS tb_formacao;'

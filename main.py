@@ -1,5 +1,5 @@
-from util import database
-from flask import Flask, render_template, request, redirect, url_for, flash
+from util import connectiondb
+from flask import Flask, render_template, request, redirect, url_for
 '''
 set FLASK_DEBUG=1
 set FLASK_ENV=development
@@ -11,7 +11,7 @@ app = Flask(__name__)
 #------ Visualização do currículo ------
 @app.route('/')
 def curriculo():
-    mysql = database.SQL('root', '', 'programacao_web')
+    mysql = connectiondb.SQL('curriculum_pablo')
 
     cmd = 'SELECT * FROM tb_formacao;'
     cs = mysql.consultar(cmd, [])
@@ -39,7 +39,7 @@ def incluirForm():
     dta_form = request.form['dta_form']
     universidade = request.form['universidade']
 
-    mysql = database.SQL('root', '', 'programacao_web')
+    mysql = connectiondb.SQL('curriculum_pablo')
     cmd = "INSERT INTO tb_formacao(nome, data_formacao, universidade) VALUES (%s, %s, %s);"
 
     mysql.executar(cmd, [form, dta_form, universidade])
@@ -48,7 +48,7 @@ def incluirForm():
 def incluirComp():
     comp = request.form['comp']
 
-    mysql = database.SQL('root', '', 'programacao_web')
+    mysql = connectiondb.SQL('curriculum_pablo')
     cmd = "INSERT INTO tb_competencia(nome) VALUES (%s);"
 
     mysql.executar(cmd, [comp])
@@ -60,7 +60,7 @@ def incluirExp():
     func = request.form['func']
     desc_exp = request.form['desc_exp']
 
-    mysql = database.SQL('root', '', 'programacao_web')
+    mysql = connectiondb.SQL('curriculum_pablo')
     cmd = "INSERT INTO tb_experiencia(empresa, data_experiencia, funcao, desc_exp) VALUES (%s, %s, %s, %s);"
 
     mysql.executar(cmd, [empresa, dta_exp, func, desc_exp])
@@ -68,7 +68,7 @@ def incluirExp():
 #------ Excluir dados ------
 @app.route('/excluir')
 def excluirDados():
-    mysql = database.SQL('root', '', 'programacao_web')
+    mysql = connectiondb.SQL('curriculum_pablo')
 
     cmd = "TRUNCATE TABLE tb_formacao;"
     mysql.executar(cmd, [])
