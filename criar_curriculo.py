@@ -2,7 +2,7 @@ from util import connectiondb
 
 database = connectiondb.Database()
 
-cmd = 'DROP DATABASE `curriculum_pablo`;'
+cmd = 'DROP DATABASE IF EXISTS curriculum_pablo;'
 if database.executar(cmd, []):
     print('Database excluído')
 
