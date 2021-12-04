@@ -1,9 +1,10 @@
 from util import connectiondb
 from flask import Flask, render_template, request, redirect, url_for
 '''
-set FLASK_DEBUG=1
-set FLASK_ENV=development
-set FLASK_APP=main.py
+set FLASK_DEBUG=1                  $env:FLASK_APP = "app"
+set FLASK_ENV=development          $env:FLASK_ENV = "development"
+set FLASK_APP=main.py              $env:FLASK_DEBUG = "1"
+       
 flask run
 '''
 app = Flask(__name__)
